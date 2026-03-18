@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samurai Store - Game Rental Catalog</title>
+    <style>
+        :root {
+            --primary: #d32f2f; /* لون أحمر ساموراي */
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #f5f5f7;
+            --accent: #ff6659;
+            --purchase: #006400;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .header h1 {
+            color: var(--primary);
+            font-size: 3em;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header p {
+            color: #aaa;
+            font-size: 1.2em;
+            margin: 0 0 20px 0;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .contact-link {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid #444;
+        }
+        .contact-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #2a2a2a;
+        }
+        .card-img {
+            width: 100%;
+            height: 180px;
+            background-color: #2a2a2a;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .game-title {
+            font-size: 1.3em;
+            margin: 0 0 15px 0;
+            color: #fff;
+            line-height: 1.4;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .tag {
+            background-color: #333;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .tag-genre { background-color: #4a148c; color: #fff; }
+        .tag-size { background-color: #004d40; color: #fff; }
+        .tag-arabic { background-color: #1b5e20; color: #fff; }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .detail-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .detail-label {
+            display: block;
+            color: #aaa;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+        .detail-price {
+            color: var(--accent);
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .rent-time {
+            text-align: center;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: auto;
+            font-size: 0.95em;
+        }
+        .buy-btn {
+    display: block;
+    background-color: #25D366; /* لون الواتساب الأخضر */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background-color: #128C7E; /* لون أغمق شوية عند مرور الماوس */
+}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Samurai Store</h1>
+        <p>كتالوج تأجير الألعاب</p>
+        <div class="contact-info">
+            <a href="tel:+201021386007" class="contact-link">
+                📞  واتساب
+            </a>
+            <a href="https://www.facebook.com/share/1HLMCtLUH7/" target="_blank" class="contact-link">
+                🌐 تابعنا على فيسبوك
+            </a>
+              <a href="https://whatsapp.com/channel/0029VbCBkvp8F2pICqf7Kl1c" target="_blank" class="contact-link">
+             🔥 قناه العروض
+            </a>
+        </div>
+    </div>
+
+    <div class="catalog-grid">
+        
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2947440/7e5d923ac622bd1775ebc9b5d4b5b0a24bf5ed40/header.jpg?t=1766449377" alt="Silent Hill f" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Silent Hill F</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Horror</div>
+                    <div class="tag tag-size">~36 GB</div>
+                   
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+          <a href="https://wa.me/201021386007?text=Rent%20Silent%20Hill%20F⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+            </div>
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1941540/d06980bb8f41737ca68da8eed40079347db09c84/header.jpg?t=1764177372" alt="Mafia The old country" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Mafia: The Old Country</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action</div>
+                    <div class="tag tag-size">~45 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">315.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
+              
+              
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Mafia%20The%20Old%20Country⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2627260/header.jpg?t=1762366827" alt="Ninja Gaiden 4" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Ninja Gaiden 4</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Hack & Slash</div>
+                    <div class="tag tag-size">~24 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">320.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+<a href="https://wa.me/201021386007?text=Rent%20Ninja%20Gaiden%204⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+</div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg?w=780&thumb=false" alt="Spiderman 2" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Spiderman 2</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">110 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">220.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Spiderman%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202511/2115/de9f11555daa455139d109c07b854880740167e531c376ab.png?w=1920&thumb=false" alt="Death Stranding 2" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Death Stranding 2</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action / Sci-Fi</div>
+                    <div class="tag tag-size">~92 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                    </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Death%20Stranding%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2233120/header.jpg?t=1736876506" alt="Little Nightmares 3" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">A Quiet Place</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Survival Horror</div>
+                    <div class="tag tag-size">~29 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">250.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                        <a href="https://wa.me/201021386007?text=Rent%20A%20Quiet%20Place⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2054970/header.jpg?t=1732148252" alt="Dragon Dogma 2" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Dragon Dogma 2</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action RPG</div>
+                    <div class="tag tag-size">65 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">270.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">165.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                                    <a href="https://wa.me/201021386007?text=Rent%20Dragon%20Dogma%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3008130/cc54d8961d51eab78fd3fb8507a866a621c2a025/header.jpg?t=1765984527" alt="Dying Light The Beast" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Dying Light: The Beast</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Survival Horror</div>
+                    <div class="tag tag-size">~36 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+               <a href="https://wa.me/201021386007?text=Rent%20Dying%20Light:%20The%20Beast⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3017860/header.jpg?t=1768344167" alt="Doom The Dark Ages" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Doom: The Dark Ages</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">FPS</div>
+                    <div class="tag tag-size">~85 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+       <a href="https://wa.me/201021386007?text=Rent%20Doom:%20The%20Dark⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2417610/05c97cbcd0cfc27c8ed6c7fc6d81e0995aa2a7d4/header.jpg?t=1762249119" alt="Metal Gear Solid Snake Eater" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Metal Gear Solid: Snake Eater</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Stealth Action</div>
+                    <div class="tag tag-size">~95 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">310.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">215.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+       <a href="https://wa.me/201021386007?text=Rent%20Metal%20Gear%20Solid:%20Snake ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1760601605" alt="Black Myth Wukong" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Black Myth Wukong</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Souls-like RPG</div>
+                    <div class="tag tag-size">110 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">180.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+        <a href="https://wa.me/201021386007?text=Rent%20Black%20Myth%20Wukong ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1763484567" alt="Split Fiction" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Split Fiction</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action co-op</div>
+                    <div class="tag tag-size">~50 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+           <a href="https://wa.me/201021386007?text=Rent%20Split%20Fiction ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1766050625" alt="Clair Obscur Expedition 33" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Clair Obscur: Expedition 33</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">RPG</div>
+                    <div class="tag tag-size">~45 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Clair%20Obscur:%20Expedition33 ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2461850/eeba63cff53a732f380249a09b0be2bbf49f2635/header.jpg?t=1767701468" alt="Hellblade II" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Hellblade II</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">42 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">210.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Hellblade%20II ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202406/0500/80ecf657918558eeef8da3ee4cef326e4517d34e6c69d950.jpg?w=1024&thumb=false" alt="Astro Bot" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Astro Bot</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Platformer</div>
+                    <div class="tag tag-size">40 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                       <a href="https://wa.me/201021386007?text=Rent%20Astro%20Bot ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2677660/151ae5a881f05ef630defef85d99b38146b7055c/header.jpg?t=1763745007" alt="Indiana Jones Great Circle" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Indiana Jones Great Circle</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">~120 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                             <a href="https://wa.me/201021386007?text=Rent%20Indiana%20Jones ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1767883716" alt="Elden Ring" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Elden Ring</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Soulsborne RPG</div>
+                    <div class="tag tag-size">60 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">225.00</div></div>
+                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                 <a href="https://wa.me/201021386007?text=Rent%20Elden%20Ring ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202504/2116/4c3157e46231c7f549d91c87a391529b0b4c71ecca39bb8a.png?w=1920&thumb=false" alt="Ghost Of Yotei" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Ghost Of Yotei</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">80 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">400.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">280.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                   <a href="https://wa.me/201021386007?text=Rent%20Ghost%20Of%20Yotei ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1285190/986a88d1b0e1420b00183def2a7034508353afa3/header.jpg?t=1765996583" alt="Borderland 4" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Borderlands 4</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Shooter RPG</div>
+                    <div class="tag tag-size">30 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                    <a href="https://wa.me/201021386007?text=Rent%20Borderlands%204 ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+ 
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2101960/68fa7b72da253c498b70cf74e475b4f5f4ac79eb/header.jpg?t=1766088247" alt="Cronos New Dawn" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Cronos New Dawn</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Survival Horror</div>
+                    <div class="tag tag-size">25 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                      <a href="https://wa.me/201021386007?text=Rent%20Cronos%20New%20Dawn ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504" alt="God Of war Ragnarok" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">God Of War Ragnarok</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">105 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">225.00</div></div>
+                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                     <a href="https://wa.me/201021386007?text=Rent%20God%20Of%20War%20Ragnarok⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1768276862" alt="Resident Evil Requiem" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Resident Evil Requiem</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Survival Horror</div>
+                    <div class="tag tag-size">~80 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">500.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">380.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+               <a href="https://wa.me/201021386007?text=Rent%20Resident%20Evil%20War%20Requiem⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876" alt="Assassin Creed Shadows" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Assassin's Creed Shadows</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action RPG</div>
+                    <div class="tag tag-size">~100 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">360.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+                  <a href="https://wa.me/201021386007?text=Rent%20Assassin's%20Creed%20War%20Shadows⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202312/0511/fb9ce1671c6a36fdf1e6548ab8947940f1fc2a1c873ae83d.jpg?w=1024&thumb=false" alt="Cyberpunk 2077 Ultimate" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Cyberpunk 2077 Ultimate</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action RPG</div>
+                    <div class="tag tag-size">80 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+               <a href="https://wa.me/201021386007?text=Rent%20Cyberpunk%202077%20War%20Ultimate⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180" alt="The Last Of us Part II" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">The Last Of Us Part II</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Horror</div>
+                    <div class="tag tag-size">80 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+               <a href="https://wa.me/201021386007?text=Rent%20The%20Last%20Of%20Us%20II⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3238470/header.jpg?t=1750947708" alt="Days Gone" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Days Gone</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action-Adventure</div>
+                    <div class="tag tag-size">35 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">320.00</div></div>
+                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">225.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">175.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Days%20Gone⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2592160/header.jpg?t=1767817184" alt="Dispatch" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Dispatch</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action</div>
+                    <div class="tag tag-size">25 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Dispatch⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg?t=1768306015" alt="Kingdom Come Deliverance II" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Kingdom Come Deliverance II</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">RPG</div>
+                    <div class="tag tag-size">~80 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Kingdom%20Come%20Deliverance%20II⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2848330/header.jpg?t=1764564898" alt="Lies Of P" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Lies Of P</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Souls-like RPG</div>
+                    <div class="tag tag-size">40 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">250.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Lies%20Of%20P⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2669410/121346be34c54e123ded376ce25c752b321937ae/header.jpg?t=1766049864" alt="Metro Awakening" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">VR Metro Awakening</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">VR / FPS</div>
+                    <div class="tag tag-size">~40 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20VR%20Metro%20Awakening⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg?t=1744248682" alt="Silent Hill 2" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Silent Hill 2</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Survival Horror</div>
+                    <div class="tag tag-size">50 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">175.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20Silent%20Hill%202⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2129530/64832d93db8e14b1f5d0999195be0a94dba15928/header_alt_assets_0.jpg?t=1768290817" alt="REANIMAL" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">REANIMAL</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Horror CO-OP</div>
+                    <div class="tag tag-size">~40 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20REANIMAL⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202602/0618/2fee30cf3febc58730657a23d3899823cb4d62e966b1f827.jpg?w=780&thumb=false" alt="God of War Sons of Sparta" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">God of War: Sons of Sparta</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Metroidvania Adventure</div>
+                    <div class="tag tag-size">8 GB</div>
+                    <div class="tag tag-arabic">تدعم العربية</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+            </div>
+            <a href="https://wa.me/201021386007?text=Rent%20God%20of%20War%20Sons%20of%20Sparta⏰" class="buy-btn">شراء الآن عبر واتساب</a>
+        </div>
+
+        <div class="card">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681010/a21264e9fd476dcb2901c2432b598107d024c5a8/header.jpg?t=1772090941" alt="Nioh 3" class="card-img">
+            <div class="card-content">
+                <h3 class="game-title">Nioh 3</h3>
+                <div class="tags">
+                    <div class="tag tag-genre">Action Souls-Like</div>
+                    <div class="tag tag-size">75 GB</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">400.00</div></div>
+                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">280.00</div></div>
+                </div>
+                <div class="rent-time">مدة الإيجار: 14 يوم</div>
+                <a href="https://wa.me/201021386007?text=Rent%20Nioh%203⏰" class="buy-btn">شراء الآن عبر واتساب</a>
