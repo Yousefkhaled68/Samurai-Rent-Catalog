@@ -1,860 +1,878 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samurai Store - Game Rental Catalog</title>
-    <style>
-        :root {
-            --primary: #d32f2f; /* لون أحمر ساموراي */
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-            --text-light: #f5f5f7;
-            --accent: #ff6659;
-            --purchase: #006400;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            margin: 0;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .header h1 {
-            color: var(--primary);
-            font-size: 3em;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .header p {
-            color: #aaa;
-            font-size: 1.2em;
-            margin: 0 0 20px 0;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .contact-link {
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #333;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 1px solid #444;
-        }
-        .contact-link:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
-        }
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            border: 3px solid #2a2a2a;
-        }
-        .card-img {
-            width: 100%;
-            height: 180px;
-            background-color: #2a2a2a;
-            object-fit: cover;
-            border-bottom: 3px solid var(--primary);
-        }
-        .card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .game-title {
-            font-size: 1.3em;
-            margin: 0 0 15px 0;
-            color: #fff;
-            line-height: 1.4;
-        }
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .tag {
-            background-color: #333;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-        .tag-genre { background-color: #4a148c; color: #fff; }
-        .tag-size { background-color: #004d40; color: #fff; }
-        .tag-arabic { background-color: #1b5e20; color: #fff; }
-        
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .detail-item {
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .detail-label {
-            display: block;
-            color: #aaa;
-            font-size: 0.85em;
-            margin-bottom: 5px;
-        }
-        .detail-price {
-            color: var(--accent);
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .rent-time {
-            text-align: center;
-            padding: 12px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: auto;
-            font-size: 0.95em;
-        }
-        .buy-btn {
-    display: block;
-    background-color: #25D366; /* لون الواتساب الأخضر */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samurai Store — كتالوج التأجير الاحترافي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   الهوية البصرية الجديدة المستوحاة من لوجو Samurai Red
+═══════════════════════════════════════════ */
+:root {
+  --bg:          #0a0708;        /* أسود ملكي عميق يبرز الألعاب */
+  --surface:     #140e10;     /* أسطح القوائم والخلفيات الفرعية */
+  --card:        #1a1214;        /* خلفية كروت الألعاب الفاخرة */
+  --border:      #2d191c;      /* حدود كروت متناسقة بروح الساموراي */
+  --border-glow: #cc111a20; 
+  --accent:      #cc111a;      /* الأحمر القرمزي الأساسي المستوحى من اللوجو */
+  --accent-rgb:  204, 17, 26;
+  --accent2:     #ef233c;     /* أحمر ناصع للتفاعل والإضاءة */
+  --accent2-rgb: 239, 35, 60;
+  --red:         #d90429;        /* أحمر صريح للحسابات المؤجرة */
+  --green:       #00b4d8;      /* أزرق كريستالي مريح للعين للحسابات المتاحة */
+  --text:        #f8f9fa;        /* نص أبيض ناصع مريح ونظيف */
+  --muted:       #a69f9f;       /* نص رمادي خافت للمعلومات الثانوية */
+  --ps5:         #0072ce;        
+  --ps4:         #003791;        
+  --radius:      12px;           /* حواف حادة وناعمة بنفس الوقت لمظهر أكثر احترافية */
+  --navbar-h:    76px;
+  --shadow:      0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-.buy-btn:hover {
-    background-color: #128C7E; /* لون أغمق شوية عند مرور الماوس */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  transition: background-color 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
 }
-    </style>
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   NAVBAR (القائمة العلوية النظيفة)
+═══════════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  height: var(--navbar-h);
+  background: rgba(10, 7, 8, 0.9);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 1000;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.logo-text span { color: var(--accent); }
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+}
+
+/* خانة البحث الفاخرة */
+.search-wrap {
+  flex: 1;
+  max-width: 440px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 44px 12px 20px;
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input:focus { 
+  border-color: var(--accent); 
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.15);
+}
+.search-input::placeholder { color: var(--muted); }
+
+.search-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.nav-link:hover { border-color: var(--accent); color: var(--accent); }
+.nav-link.whatsapp { background: #128c7e; border-color: #128c7e; color: #fff; }
+.nav-link.whatsapp:hover { background: #14a393; border-color: #14a393; transform: translateY(-2px); }
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+main {
+  padding-top: calc(var(--navbar-h) + 40px);
+  padding-bottom: 80px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.hero {
+  text-align: center;
+  padding: 10px 0 35px;
+}
+
+.hero h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #fff 40%, #e5b3b6 70%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   DURATION PICKER
+═══════════════════════════════════════════ */
+.duration-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.duration-label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.duration-btns {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.dur-btn {
+  padding: 8px 22px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.dur-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════════ */
+.stats-bar {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stat-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ═══════════════════════════════════════════
+   GRID
+═══════════════════════════════════════════ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ═══════════════════════════════════════════
+   CARD DESIGN (شيك ونظيف)
+═══════════════════════════════════════════ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(var(--accent-rgb), 0.15);
+}
+
+.card.out-of-stock {
+  opacity: 0.6;
+}
+.card.out-of-stock:hover {
+  transform: none;
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+.oos-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #221a1b;
+  color: #ff4d4d;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 4px;
+  z-index: 10;
+  border: 1px solid #ff4d4d30;
+}
+
+.card-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card:hover .card-img {
+  transform: scale(1.03);
+}
+
+/* التسميات والمؤشرات الجديدة الفاخرة فوق الصورة */
+.card-badges-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.game-genre-badge {
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.arabic-badge {
+  background: rgba(204, 17, 26, 0.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+}
+
+.card-name {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.4;
+  color: #fff;
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid transparent;
+}
+
+.slot-row.rented {
+  opacity: 0.4;
+}
+
+.slot-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slot-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.slot-badge.ps5 { background: rgba(0, 114, 206, 0.12); color: #52b1ff; border: 1px solid rgba(0, 114, 206, 0.25); }
+.slot-badge.ps4 { background: rgba(0, 55, 145, 0.15); color: #7faeff; border: 1px solid rgba(0, 55, 145, 0.25); }
+.slot-badge.sec { background: rgba(204, 17, 26, 0.12); color: #ff6b73; border: 1px solid rgba(204, 17, 26, 0.25); }
+
+.slot-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+}
+.slot-price span {
+  font-size: 11px;
+  color: var(--muted);
+  margin-right: 2px;
+}
+
+.slot-status {
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.slot-status::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.slot-status.available { color: var(--green); }
+.slot-status.available::before { background: var(--green); }
+.slot-status.rented    { color: var(--red); }
+.slot-status.rented::before { background: var(--red); }
+
+/* زر الإيجار الفاخر */
+.card-footer {
+  padding: 0 18px 18px;
+}
+
+.rent-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rent-btn:hover { 
+  background: var(--accent2);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════
+   STATES & FOOTER
+═══════════════════════════════════════════ */
+.loading-state, .empty-state, .error-state {
+  text-align: center;
+  padding: 100px 20px;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.results-count {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.footer {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  border-top: 1px solid var(--border);
+  margin-top: 80px;
+  background: var(--surface);
+}
+
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; gap: 12px; height: 68px; }
+  .logo-img { width: 36px; height: 36px; }
+  .logo-text { font-size: 16px; }
+  .logo-sub { display: none; }
+  .nav-links .nav-link:not(.whatsapp) { display: none; }
+  main { padding-top: calc(68px + 24px); }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .card-body { padding: 14px; gap: 10px; }
+  .card-name { font-size: 15px; min-height: 42px; }
+  .dur-btn { padding: 8px 16px; font-size: 12px; }
+}
+</style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Samurai Store</h1>
-        <p>كتالوج تأجير الألعاب</p>
-        <div class="contact-info">
-            <a href="tel:+201021386007" class="contact-link">
-                📞  واتساب
-            </a>
-            <a href="https://www.facebook.com/share/1HLMCtLUH7/" target="_blank" class="contact-link">
-                🌐 تابعنا على فيسبوك
-            </a>
-              <a href="https://whatsapp.com/channel/0029VbCBkvp8F2pICqf7Kl1c" target="_blank" class="contact-link">
-             🔥 قناه العروض
-            </a>
-        </div>
+<nav class="navbar">
+  <a class="logo" href="#">
+    <img class="logo-img" src="https://i.postimg.cc/wTmxYQwc/Samurai-png.jpg" onerror="this.style.display='none'" id="logo-img" alt="Samurai">
+    <div>
+      <div class="logo-text">SAMURAI <span>STORE</span></div>
+      <div class="logo-sub">PREMIUM RENTAL CATALOG</div>
     </div>
+  </a>
 
-    <div class="catalog-grid">
-        
-                           <div class="card">
-            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3357650/e32e168b25ed68a0cf6264c220c07e96c2abfb56/header.jpg?t=1777351016" alt="Nioh 3" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">PRAGMATA</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action Cute Third-Person Shooter</div>
-                    <div class="tag tag-size">33 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
+  <div class="search-wrap">
+    <input class="search-input" type="text" placeholder="ابحث عن لعبتك المفضلة الآن..." id="searchInput">
+    <span class="search-icon">🔍</span>
+  </div>
 
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">450.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">290.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-                <a href="https://wa.me/201021386007?text=Rent%20PRAGMATA%20⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-            </div> </div>
+  <div class="nav-links">
+    <a class="nav-link" href="https://www.facebook.com/share/1HLMCtLUH7/" target="_blank">فيسبوك</a>
+    <a class="nav-link whatsapp" href="https://wa.me/201021386007" target="_blank">واتساب 💬</a>
+  </div>
+</nav>
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2947440/7e5d923ac622bd1775ebc9b5d4b5b0a24bf5ed40/header.jpg?t=1766449377" alt="Silent Hill f" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Silent Hill F</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Horror</div>
-                    <div class="tag tag-size">~36 GB</div>
-                   
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-          <a href="https://wa.me/201021386007?text=Rent%20Silent%20Hill%20F⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+<main>
+  <div class="hero">
+    <h1>كتالوج تأجير الألعاب الحصري</h1>
+    <p>تصفح مخزون الألعاب المتوفر لدينا بشكل حي، حدد المنصة والمدة، واطلب مباشرة عبر واتساب</p>
+  </div>
 
-            </div>
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1941540/d06980bb8f41737ca68da8eed40079347db09c84/header.jpg?t=1764177372" alt="Mafia The old country" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Mafia: The Old Country</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action</div>
-                    <div class="tag tag-size">~45 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">315.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
-              
-              
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Mafia%20The%20Old%20Country⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  <div class="duration-bar">
+    <span class="duration-label">مدة الإيجار:</span>
+    <div class="duration-btns">
+      <button class="dur-btn active" data-days="14">14 يوم</button>
+      <button class="dur-btn"        data-days="21">21 يوم</button>
+      <button class="dur-btn"        data-days="30">شهر كامل</button>
+    </div>
+  </div>
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2627260/header.jpg?t=1762366827" alt="Ninja Gaiden 4" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Ninja Gaiden 4</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Hack & Slash</div>
-                    <div class="tag tag-size">~24 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">320.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-<a href="https://wa.me/201021386007?text=Rent%20Ninja%20Gaiden%204⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-</div>
+  <div class="stats-bar" id="statsBar" style="display:none">
+    <div class="stat-chip">
+      <span class="stat-dot" style="background:var(--green)"></span>
+      <span id="statAvail">0</span> حساب متاح حالياً
+    </div>
+    <div class="stat-chip">
+      <span class="stat-dot" style="background:var(--red)"></span>
+      <span id="statRented">0</span> حساب مؤجر
+    </div>
+    <div class="stat-chip">
+      🎮 إجمالي الكتالوج: <span id="statTotal">0</span> لعبة مفعلة
+    </div>
+  </div>
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/97e9f5fa6e50c185d249956c6f198a2652a9217e69a59ecd.jpg?w=780&thumb=false" alt="Spiderman 2" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Spiderman 2</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">110 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">220.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Spiderman%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  <div class="results-count" id="resultsCount" style="display:none"></div>
 
-        </div>
+  <div id="gameGrid" class="grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>جاري الاتصال بالمخزون وتحديث الأسعار حية...</p>
+    </div>
+  </div>
+</main>
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202511/2115/de9f11555daa455139d109c07b854880740167e531c376ab.png?w=1920&thumb=false" alt="Death Stranding 2" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Death Stranding 2</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action / Sci-Fi</div>
-                    <div class="tag tag-size">~92 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                    </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Death%20Stranding%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+<footer class="footer">
+  Samurai Store © 2026 · المتجر الرائد لتأجير ألعاب PlayStation في مصر · 📞 01021386007
+</footer>
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2233120/header.jpg?t=1736876506" alt="Little Nightmares 3" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">A Quiet Place</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Survival Horror</div>
-                    <div class="tag tag-size">~29 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">250.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                        <a href="https://wa.me/201021386007?text=Rent%20A%20Quiet%20Place⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+<script>
+// ═══════════════════════════════════════════
+//  CONFIG — الحفاظ على رابط الـ API الحي لبيانات شيت جوجل الخاصة بك
+// ═══════════════════════════════════════════
+const CONFIG = {
+  API_URL:      'https://script.google.com/macros/s/AKfycbwXJbUE_ephYJMN0kBQEqiO36bq9lFPxvcvfOIeLNLTm5-0pLGkISWb1Qagmu2lGBGp/exec',
+  WHATSAPP:     '201021386007',
+  LOGO_URL:     '', // ضع رابط صورة اللوجو المباشر هنا لتظهر مكان الدائرة العلوية بشكل ممتاز
+  DURATION_MAP: { '14': '14 يوم', '21': '21 يوم', '30': 'شهر' },
+};
 
-        </div>
+let allGames   = [];
+let activeDays = '14';
+let searchQ    = '';
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2054970/header.jpg?t=1732148252" alt="Dragon Dogma 2" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Dragon Dogma 2</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action RPG</div>
-                    <div class="tag tag-size">65 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">270.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">165.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                                    <a href="https://wa.me/201021386007?text=Rent%20Dragon%20Dogma%202⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+document.addEventListener('DOMContentLoaded', () => {
+  const logoImg = document.getElementById('logo-img');
+  if (CONFIG.LOGO_URL) { 
+    logoImg.src = CONFIG.LOGO_URL; 
+    logoImg.style.display = 'block'; 
+  }
 
-        </div>
+  document.querySelectorAll('.dur-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeDays = btn.dataset.days;
+      render();
+    });
+  });
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3008130/cc54d8961d51eab78fd3fb8507a866a621c2a025/header.jpg?t=1765984527" alt="Dying Light The Beast" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Dying Light: The Beast</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Survival Horror</div>
-                    <div class="tag tag-size">~36 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-               <a href="https://wa.me/201021386007?text=Rent%20Dying%20Light:%20The%20Beast⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchQ = e.target.value.trim().toLowerCase();
+    render();
+  });
 
-        </div>
+  fetchGames();
+});
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3017860/header.jpg?t=1768344167" alt="Doom The Dark Ages" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Doom: The Dark Ages</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">FPS</div>
-                    <div class="tag tag-size">~85 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-       <a href="https://wa.me/201021386007?text=Rent%20Doom:%20The%20Dark⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+async function fetchGames() {
+  const grid = document.getElementById('gameGrid');
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2417610/05c97cbcd0cfc27c8ed6c7fc6d81e0995aa2a7d4/header.jpg?t=1762249119" alt="Metal Gear Solid Snake Eater" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Metal Gear Solid: Snake Eater</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Stealth Action</div>
-                    <div class="tag tag-size">~95 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">310.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">215.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-       <a href="https://wa.me/201021386007?text=Rent%20Metal%20Gear%20Solid:%20Snake ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  if (!CONFIG.API_URL || CONFIG.API_URL.includes('YOUR_APPS')) {
+    allGames = getDemoGames();
+    updateStats();
+    render();
+    return;
+  }
 
-        </div>
+  try {
+    const res  = await fetch(CONFIG.API_URL);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'API Error');
+    allGames = data.games;
+    updateStats();
+    render();
+  } catch (err) {
+    grid.innerHTML = `
+      <div class="error-state">
+        <div style="font-size:44px;margin-bottom:16px">⚠️</div>
+        <p style="font-size:18px;font-weight:800;color:var(--red);margin-bottom:8px">فشل مزامنة البيانات تلقائياً</p>
+        <p style="font-size:14px;color:var(--muted)">تأكد من تفعيل عمل الـ Web App على شيت جوجل الخاص بك، وتحديث الأعمِدة.</p>
+      </div>`;
+  }
+}
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1760601605" alt="Black Myth Wukong" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Black Myth Wukong</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Souls-like RPG</div>
-                    <div class="tag tag-size">110 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">180.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-        <a href="https://wa.me/201021386007?text=Rent%20Black%20Myth%20Wukong ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+function render() {
+  const grid = document.getElementById('gameGrid');
 
-        </div>
+  // تحسين البحث ليشمل اسم اللعبة أو التصنيفات المضافة حديثاً
+  const filtered = allGames.filter(g => {
+    const nameMatch = g.name.toLowerCase().includes(searchQ);
+    const catMatch  = g.category && g.category.toLowerCase().includes(searchQ);
+    return !searchQ || nameMatch || catMatch;
+  });
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1763484567" alt="Split Fiction" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Split Fiction</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action co-op</div>
-                    <div class="tag tag-size">~50 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">235.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-           <a href="https://wa.me/201021386007?text=Rent%20Split%20Fiction ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty-state"><p style="font-size:36px">🔍</p><p style="margin-top:12px; font-weight:700">لم نجد ألعاب تطابق بحثك عن "${searchQ}"</p></div>`;
+    updateResultsCount(0);
+    return;
+  }
 
-        </div>
+  grid.innerHTML = '';
+  filtered.forEach(game => grid.appendChild(buildCard(game)));
 
-                     <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202509/2318/ca19e7b6909c03a0d64a84981109c0cdaa98e7fdb8820e36.png?w=940&thumb=false" alt="SAROS" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">SAROS</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action Shooter</div>
-                    <div class="tag tag-size">84 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">450.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">320.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-                <a href="https://wa.me/201021386007?text=Rent%20SAROS%20⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-            </div> </div>
+  updateResultsCount(filtered.length);
+}
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1766050625" alt="Clair Obscur Expedition 33" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Clair Obscur: Expedition 33</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">RPG</div>
-                    <div class="tag tag-size">~45 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Clair%20Obscur:%20Expedition33 ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+function buildCard(game) {
+  const card = document.createElement('div');
+  card.className = 'card';
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2461850/eeba63cff53a732f380249a09b0be2bbf49f2635/header.jpg?t=1767701468" alt="Hellblade II" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Hellblade II</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">42 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">210.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Hellblade%20II ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  const slotsInfo = getSlotsInfo(game);
+  const allUnavailable = slotsInfo.every(s => s.status === 'rented' || !s.price);
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202406/0500/80ecf657918558eeef8da3ee4cef326e4517d34e6c69d950.jpg?w=1024&thumb=false" alt="Astro Bot" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Astro Bot</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Platformer</div>
-                    <div class="tag tag-size">40 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                       <a href="https://wa.me/201021386007?text=Rent%20Astro%20Bot ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  if (allUnavailable) card.classList.add('out-of-stock');
 
-        </div>
+  if (allUnavailable) {
+    const badge = document.createElement('div');
+    badge.className = 'oos-badge';
+    badge.textContent = 'غير متاح حالياً';
+    card.appendChild(badge);
+  }
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2677660/151ae5a881f05ef630defef85d99b38146b7055c/header.jpg?t=1763745007" alt="Indiana Jones Great Circle" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Indiana Jones Great Circle</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">~120 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">350.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                             <a href="https://wa.me/201021386007?text=Rent%20Indiana%20Jones ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'card-img-wrap';
 
-        </div>
+  const img = document.createElement('img');
+  img.className = 'card-img';
+  img.src = game.image || '';
+  img.alt = game.name;
+  img.loading = 'lazy';
+  img.onerror = () => { img.style.display = 'none'; };
+  imgWrap.appendChild(img);
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1767883716" alt="Elden Ring" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Elden Ring</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Soulsborne RPG</div>
-                    <div class="tag tag-size">60 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">225.00</div></div>
-                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                 <a href="https://wa.me/201021386007?text=Rent%20Elden%20Ring ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  // ═══════════════════════════════════════════
+  // إضافة تصنيف اللعبة واللغة العربية بشكل شيك فوق الصورة
+  // ═══════════════════════════════════════════
+  const isArabic = game.arabic === true || String(game.arabic).toLowerCase() === 'نعم' || String(game.arabic).toLowerCase() === 'yes';
+  
+  if (game.category || isArabic) {
+    const badgesContainer = document.createElement('div');
+    badgesContainer.className = 'card-badges-container';
 
-        </div>
+    // 1. شارة التصنيف (Genre)
+    if (game.category) {
+      const genreBadge = document.createElement('div');
+      genreBadge.className = 'game-genre-badge';
+      genreBadge.textContent = game.category;
+      badgesContainer.appendChild(genreBadge);
+    } else {
+      // حاوية وهمية تضمن بقاء شارة العربي لليسار في غياب التصنيف الرئيسي
+      const spacer = document.createElement('div');
+      badgesContainer.appendChild(spacer);
+    }
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202504/2116/4c3157e46231c7f549d91c87a391529b0b4c71ecca39bb8a.png?w=1920&thumb=false" alt="Ghost Of Yotei" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Ghost Of Yotei</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">80 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">400.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">280.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                   <a href="https://wa.me/201021386007?text=Rent%20Ghost%20Of%20Yotei ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+    // 2. شارة دعم اللغة العربية
+    if (isArabic) {
+      const arBadge = document.createElement('div');
+      arBadge.className = 'arabic-badge';
+      arBadge.innerHTML = 'عربي 🌍';
+      badgesContainer.appendChild(arBadge);
+    }
 
-        </div>
+    imgWrap.appendChild(badgesContainer);
+  }
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1285190/986a88d1b0e1420b00183def2a7034508353afa3/header.jpg?t=1765996583" alt="Borderland 4" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Borderlands 4</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Shooter RPG</div>
-                    <div class="tag tag-size">30 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                    <a href="https://wa.me/201021386007?text=Rent%20Borderlands%204 ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
- 
-        </div>
+  card.appendChild(imgWrap);
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2101960/68fa7b72da253c498b70cf74e475b4f5f4ac79eb/header.jpg?t=1766088247" alt="Cronos New Dawn" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Cronos New Dawn</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Survival Horror</div>
-                    <div class="tag tag-size">25 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                      <a href="https://wa.me/201021386007?text=Rent%20Cronos%20New%20Dawn ⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  const body = document.createElement('div');
+  body.className = 'card-body';
 
-        </div>
+  const name = document.createElement('div');
+  name.className = 'card-name';
+  name.textContent = game.name;
+  body.appendChild(name);
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504" alt="God Of war Ragnarok" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">God Of War Ragnarok</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">105 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">225.00</div></div>
-                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                     <a href="https://wa.me/201021386007?text=Rent%20God%20Of%20War%20Ragnarok⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  const slots = document.createElement('div');
+  slots.className = 'slots';
 
-        </div>
+  slotsInfo.forEach(s => {
+    if (!s.price && s.status === 'unavailable') return;
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1768276862" alt="Resident Evil Requiem" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Resident Evil Requiem</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Survival Horror</div>
-                    <div class="tag tag-size">~80 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">500.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">380.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-               <a href="https://wa.me/201021386007?text=Rent%20Resident%20Evil%20War%20Requiem⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+    const row = document.createElement('div');
+    row.className = 'slot-row' + (s.status === 'rented' ? ' rented' : '');
 
-        </div>
+    const left = document.createElement('div');
+    left.className = 'slot-label';
+    left.innerHTML = `<span class="slot-badge ${s.key}">${s.label}</span>`;
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1767633876" alt="Assassin Creed Shadows" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Assassin's Creed Shadows</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action RPG</div>
-                    <div class="tag tag-size">~100 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">360.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">250.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-                  <a href="https://wa.me/201021386007?text=Rent%20Assassin's%20Creed%20War%20Shadows⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+    const right = document.createElement('div');
+    right.style.display = 'flex';
+    right.style.alignItems = 'center';
+    right.style.gap = '14px';
 
-        </div>
+    const price = document.createElement('span');
+    if (s.price) {
+      price.className = 'slot-price';
+      price.innerHTML = `${s.price} <span>ج.م</span>`;
+    } else {
+      price.className = 'slot-price';
+      price.style.color = 'var(--muted)';
+      price.textContent = '—';
+    }
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202312/0511/fb9ce1671c6a36fdf1e6548ab8947940f1fc2a1c873ae83d.jpg?w=1024&thumb=false" alt="Cyberpunk 2077 Ultimate" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Cyberpunk 2077 Ultimate</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action RPG</div>
-                    <div class="tag tag-size">80 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-               <a href="https://wa.me/201021386007?text=Rent%20Cyberpunk%202077%20War%20Ultimate⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+    const status = document.createElement('span');
+    status.className = `slot-status ${s.status}`;
+    status.textContent = s.status === 'available' ? 'متاح' : s.status === 'rented' ? 'مؤجر' : '';
 
-        </div>
+    right.appendChild(price);
+    right.appendChild(status);
+    row.appendChild(left);
+    row.appendChild(right);
+    slots.appendChild(row);
+  });
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180" alt="The Last Of us Part II" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">The Last Of Us Part II</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Horror</div>
-                    <div class="tag tag-size">80 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">200.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">150.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-               <a href="https://wa.me/201021386007?text=Rent%20The%20Last%20Of%20Us%20II⏰ "class="buy-btn">شراء الآن عبر واتساب</a>
+  body.appendChild(slots);
+  card.appendChild(body);
 
-        </div>
+  const footer = document.createElement('div');
+  footer.className = 'card-footer';
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3238470/header.jpg?t=1750947708" alt="Days Gone" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Days Gone</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action-Adventure</div>
-                    <div class="tag tag-size">35 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">320.00</div></div>
-                    <div class="detail-item"><div class="detail-label">PS4</div><div class="detail-price">225.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">175.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Days%20Gone⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  if (!allUnavailable) {
+    const btn = document.createElement('a');
+    btn.className = 'rent-btn';
+    const durationText = CONFIG.DURATION_MAP[activeDays] || `${activeDays} يوم`;
+    const msg = encodeURIComponent(`مرحباً Samurai Store، أود استئجار لعبة: ${game.name}\nلمدة: ${durationText}`);
+    btn.href = `https://wa.me/${CONFIG.WHATSAPP}?text=${msg}`;
+    btn.target = '_blank';
+    btn.innerHTML = 'احجز اللعبة الآن 🎮';
+    footer.appendChild(btn);
+  }
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2592160/header.jpg?t=1767817184" alt="Dispatch" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Dispatch</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action</div>
-                    <div class="tag tag-size">25 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Dispatch⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  card.appendChild(footer);
+  return card;
+}
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg?t=1768306015" alt="Kingdom Come Deliverance II" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Kingdom Come Deliverance II</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">RPG</div>
-                    <div class="tag tag-size">~80 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Kingdom%20Come%20Deliverance%20II⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+function getSlotsInfo(game) {
+  const d = activeDays;
+  const p = game.prices || {};
+  const s = game.stock  || {};
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2848330/header.jpg?t=1764564898" alt="Lies Of P" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Lies Of P</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Souls-like RPG</div>
-                    <div class="tag tag-size">40 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">250.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Lies%20Of%20P⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  return [
+    { key: 'ps5', label: 'PS5 الحساب كاملاً', price: p.ps5?.[d] || 0, status: s.ps5 || 'unavailable' },
+    { key: 'ps4', label: 'PS4 الحساب كاملاً', price: p.ps4?.[d] || 0, status: s.ps4 || 'unavailable' },
+    { key: 'sec', label: 'الحساب الثانوي',   price: p.sec?.[d] || 0, status: s.sec || 'unavailable' },
+  ];
+}
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2669410/121346be34c54e123ded376ce25c752b321937ae/header.jpg?t=1766049864" alt="Metro Awakening" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">VR Metro Awakening</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">VR / FPS</div>
-                    <div class="tag tag-size">~40 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20VR%20Metro%20Awakening⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+function updateStats() {
+  let avail = 0, rented = 0;
+  allGames.forEach(g => {
+    const s = g.stock || {};
+    ['ps5','ps4','sec'].forEach(k => {
+      if (s[k] === 'available') avail++;
+      else if (s[k] === 'rented') rented++;
+    });
+  });
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg?t=1744248682" alt="Silent Hill 2" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Silent Hill 2</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Survival Horror</div>
-                    <div class="tag tag-size">50 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">275.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">175.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20Silent%20Hill%202⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+  document.getElementById('statAvail').textContent  = avail;
+  document.getElementById('statRented').textContent = rented;
+  document.getElementById('statTotal').textContent  = allGames.length;
+  document.getElementById('statsBar').style.display = 'flex';
+}
 
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2129530/64832d93db8e14b1f5d0999195be0a94dba15928/header_alt_assets_0.jpg?t=1768290817" alt="REANIMAL" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">REANIMAL</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Horror CO-OP</div>
-                    <div class="tag tag-size">~40 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">325.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">225.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20REANIMAL⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
+function updateResultsCount(count) {
+  const el = document.getElementById('resultsCount');
+  if (searchQ) {
+    el.textContent = `تم العثور على عروض لـ ${count} لعبة تطابق بحثك`;
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
 
-        <div class="card">
-            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202602/0618/2fee30cf3febc58730657a23d3899823cb4d62e966b1f827.jpg?w=780&thumb=false" alt="God of War Sons of Sparta" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">God of War: Sons of Sparta</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Metroidvania Adventure</div>
-                    <div class="tag tag-size">8 GB</div>
-                    <div class="tag tag-arabic">تدعم العربية</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">300.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">200.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-            </div>
-            <a href="https://wa.me/201021386007?text=Rent%20God%20of%20War%20Sons%20of%20Sparta⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-        </div>
-
-       <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681010/a21264e9fd476dcb2901c2432b598107d024c5a8/header.jpg?t=1772090941" alt="Nioh 3" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Nioh 3</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action Souls-Like</div>
-                    <div class="tag tag-size">75 GB</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">400.00</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">280.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-                <a href="https://wa.me/201021386007?text=Rent%20Nioh%203⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-            </div> </div>
-
-        <div class="card">
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3321460/abd7dbdeaede8b6c9a6d40bf116ff2b883f2dd45/header.jpg?t=1770115850" alt="Crimson Desert" class="card-img">
-            <div class="card-content">
-                <h3 class="game-title">Crimson Desert</h3>
-                <div class="tags">
-                    <div class="tag tag-genre">Action RPG</div>
-                    <div class="tag tag-size">83 GB</div>
-                </div>
-                <div class="details-grid">
-                 <div class="detail-item"><div class="detail-label">PS5</div><div class="detail-price">470</div></div>
-                    <div class="detail-item"><div class="detail-label">Secondary</div><div class="detail-price">330.00</div></div>
-                </div>
-                <div class="rent-time">مدة الإيجار: 14 يوم</div>
-                <a href="https://wa.me/201021386007?text=Rent%20Crimson%20Desert⏰" class="buy-btn">شراء الآن عبر واتساب</a>
-            </div>
-        </div>
+function getDemoGames() {
+  return [
+    {
+      name: 'Ghost of Yotei',
+      image: 'https://image.api.playstation.com/vulcan/ap/rnd/202504/2116/4c3157e46231c7f549d91c87a391529b0b4c71ecca39bb8a.png?w=1920&thumb=false',
+      category: 'أكشن / مغامرات',
+      arabic: true,
+      prices: { ps5: {'14':400,'21':520,'30':650}, ps4: {}, sec: {'14':280,'21':360,'30':450} },
+      stock:  { ps5: 'available', ps4: 'unavailable', sec: 'rented' }
+    }
+  ];
+}
+</script>
+</body>
+</html>
