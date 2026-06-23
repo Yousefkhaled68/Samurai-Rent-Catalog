@@ -812,7 +812,7 @@ function buildCard(game) {
     const btn = document.createElement('a');
     btn.className = 'rent-btn';
     const durationText = CONFIG.DURATION_MAP[activeDays] || `${activeDays} يوم`;
-    const msg = encodeURIComponent(` تاجير لعبه: ${game.name}\nلمدة: ${durationText}`);
+const msg = encodeURIComponent(`تاجير ${game.name}\nلمدة: ${durationText}`);
     btn.href = `https://wa.me/${CONFIG.WHATSAPP}?text=${msg}`;
     btn.target = '_blank';
     btn.innerHTML = 'احجز اللعبة الآن 🎮';
@@ -829,9 +829,9 @@ function getSlotsInfo(game) {
   const s = game.stock  || {};
 
   return [
-    { key: 'ps5', label: 'PS5 حساب اساسي', price: p.ps5?.[d] || 0, status: s.ps5 || 'unavailable' },
-    { key: 'ps4', label: 'PS4 حساب اساسي, price: p.ps4?.[d] || 0, status: s.ps4 || 'unavailable' },
-    { key: 'sec', label: 'الحساب الثانوي',   price: p.sec?.[d] || 0, status: s.sec || 'unavailable' },
+    { key: 'ps5', label: 'PS5 حساب برايمري', price: p.ps5?.[d] || 0, status: s.ps5 || 'unavailable' },
+    { key: 'ps4', label: 'PS4 حساب برايمري', price: p.ps4?.[d] || 0, status: s.ps4 || 'unavailable' },
+    { key: 'sec', label: 'حساب الثانوي',   price: p.sec?.[d] || 0, status: s.sec || 'unavailable' },
   ];
 }
 
